@@ -2,26 +2,30 @@
 
 <template>
   <div class="home">
-    <div class="count">
-      {{ count }}
-    </div>
+    <Counter />
     <div class="buttons">
-    <button @click="decreaseCount">-</button>
-    <button @click="increaseCount">+</button>
+    <button @click="counterStore.decreaseCount">-</button>
+    <button @click="counterStore.increaseCount">+</button>
     </div>
     <hr>
     <div>
-      This counter is: {{ oddOrEven }}
+      This counter is: {{ counterStore.OddOrEven }}
+    </div>
+    <hr>
+    <div>
+      <h3>Edit counter:</h3>
+      <input v-model="counterStore.count" type="number"> <!--v-model toma el valor y lo edita en todo lado-->
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import Counter from '@/components/Counter.vue'
+import { useCounterStore } from '../stores/counter.js';
 
-const count = ref(0)
+const counterStore = useCounterStore()
 
-const increaseCount = () => { /** arrow function para guardar la funcion en una constante*/
+/**const increaseCount = () => { /** arrow function para guardar la funcion en una constante
   count.value++
 }
 
@@ -32,7 +36,7 @@ const decreaseCount = () => {
 const oddOrEven = computed(() => {
   if (count.value % 2 === 0) return 'even'
   return 'odd'
-})
+})**/
 
 </script>
 
